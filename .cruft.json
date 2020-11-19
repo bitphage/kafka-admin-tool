@@ -1,0 +1,18 @@
+{
+    "template": "https://github.com/bitfag/cookiecutter-base-py-project",
+    "commit": "5257b29e3b41bbe9a9181fcfa1925e8f8a60928f",
+    "context": {
+        "cookiecutter": {
+            "project_name": "kafka-admin-tool",
+            "package_name": "kafkaadmin",
+            "version": "0.1.0",
+            "description": "Admin instruments for kafka",
+            "author": "bitphage",
+            "email": "vvk@vvk.pp.ru",
+            "full_name": "Vladimir Kamarzin",
+            "license": "MIT",
+            "line_width": "120",
+            "_template": "https://github.com/bitfag/cookiecutter-base-py-project"
+        }
+    }
+}
