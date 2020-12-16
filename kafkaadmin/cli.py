@@ -42,7 +42,7 @@ def describe_topic(admin, topic):
 @click.argument("prefix")
 @click.pass_obj
 def describe_topics(admin, prefix):
-    """Describe multiple topics using prefix."""
+    """Describe multiple topics matching PREFIX."""
     topics = admin.get_topics_by_prefix(prefix)
     out = admin.admin.describe_topics(topics=topics)
     pprint(out)
@@ -53,7 +53,7 @@ def describe_topics(admin, prefix):
 @click.option("--config_var", help="show specific config variable like retention.ms")
 @click.pass_obj
 def describe_topic_config(admin, topic, config_var):
-    """Show topic config."""
+    """Show TOPIC config."""
     configs = {}
     if config_var is not None:
         configs = {config_var: True}
@@ -69,7 +69,7 @@ def describe_topic_config(admin, topic, config_var):
 @click.argument("value")
 @click.pass_obj
 def alter_topic_config(admin, topic, config_var, value):
-    """Alter topic config."""
+    """Alter TOPIC config."""
     resource = ConfigResource(ConfigResourceType.TOPIC, topic, configs={config_var: value})
     click.echo(f"setting {config_var}:{value}")
     admin.admin.alter_configs([resource])
@@ -79,7 +79,7 @@ def alter_topic_config(admin, topic, config_var, value):
 @prefix_option
 @click.pass_obj
 def delete_topics(admin, prefix):
-    """Delete all topics starting with prefix."""
+    """Delete all topics matching prefix."""
     topics = admin.get_topics_by_prefix(prefix)
     click.echo("going to delete following topics:")
     pprint(topics)
