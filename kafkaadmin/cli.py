@@ -1,6 +1,7 @@
 from pprint import pprint
 
 import click
+import yaml
 from kafka.admin import ConfigResource, ConfigResourceType
 
 from kafkaadmin.admin import Admin
@@ -15,7 +16,8 @@ from kafkaadmin.options import prefix_option
 )
 @click.pass_context
 def main(ctx, debug, config):
-    ctx.obj = Admin(config, debug)
+    conf = yaml.safe_load(config)
+    ctx.obj = Admin(conf, debug)
 
 
 @main.command()
