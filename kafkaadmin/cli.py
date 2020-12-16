@@ -4,7 +4,7 @@ import click
 from kafka.admin import ConfigResource, ConfigResourceType
 
 from kafkaadmin.admin import Admin
-from kafkaadmin.functions import prefix_option
+from kafkaadmin.options import prefix_option
 
 
 @click.group()
