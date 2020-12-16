@@ -1,5 +1,5 @@
 import logging
-from typing import List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 import yaml
 from kafka import KafkaAdminClient, KafkaConsumer
@@ -16,6 +16,12 @@ class Admin:
 
         self.admin = KafkaAdminClient(bootstrap_servers=self.config["bootstrap_servers"])
         self.consumer = KafkaConsumer(bootstrap_servers=self.config["bootstrap_servers"])
+
+    @staticmethod
+    def generate_topics_move(topics: List[str]) -> Dict[str, Any]:
+        jsonified_topics: List[Dict[str, str]] = [{"topic": t} for t in topics]
+        generated = {"topics": jsonified_topics, "version": 1}
+        return generated
 
     def get_topics_by_prefix(self, prefix: Optional[str] = None) -> List[str]:
         """Return all topics matched prefix."""

@@ -4,6 +4,7 @@ import click
 from kafka.admin import ConfigResource, ConfigResourceType
 
 from kafkaadmin.admin import Admin
+from kafkaadmin.functions import write_json
 from kafkaadmin.options import prefix_option
 
 
@@ -32,6 +33,16 @@ def list_topics(admin, prefix):
 def describe_topic(admin, topic):
     """Describe a TOPIC."""
     out = admin.admin.describe_topics(topics=[topic])
+    pprint(out)
+
+
+@main.command()
+@click.argument("prefix")
+@click.pass_obj
+def describe_topics(admin, prefix):
+    """Describe multiple topics using prefix."""
+    topics = admin.get_topics_by_prefix(prefix)
+    out = admin.admin.describe_topics(topics=topics)
     pprint(out)
 
 
@@ -74,6 +85,17 @@ def delete_topics(admin, prefix):
     answer = click.prompt("are you sure?", default="n", type=click.Choice(["y", "n"]))
     if answer == "y":
         admin.delete_topics(topics)
+
+
+@main.command()
+@prefix_option
+@click.option("--filename", default="topics-to-move.json", help="Output filename")
+@click.pass_obj
+def generate_topics_move(admin, prefix, filename):
+    """Generates topics-to-move.json file for later use with kafka-reassign-partitions.sh tool."""
+    topics = admin.get_topics_by_prefix(prefix)
+    move = admin.generate_topics_move(topics)
+    write_json(move, filename)
 
 
 if __name__ == "__main__":
