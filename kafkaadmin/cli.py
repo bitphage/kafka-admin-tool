@@ -86,7 +86,7 @@ def delete_topics(admin, prefix):
 
     answer = click.prompt("are you sure?", default="n", type=click.Choice(["y", "n"]))
     if answer == "y":
-        admin.delete_topics(topics)
+        admin.admin.delete_topics(topics)
 
 
 @main.command()
