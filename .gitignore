@@ -76,3 +76,5 @@ data_*.json
 *.sqlite
 venv/
 *~
+
+*.yml
