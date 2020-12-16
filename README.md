@@ -16,3 +16,10 @@ Installation via poetry
 poetry shell
 ./admin.py
 ```
+
+Running tests
+-------------
+
+Use `pytest -v tests/`.
+
+Testsuite is run against real kafka cluster launched in docker automatically.
