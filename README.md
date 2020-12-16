@@ -2,6 +2,42 @@
 
 Cli tool to automate some kafka admin actions.
 
+Features
+--------
+
+Rationale to have such a tool is that current cli tools like `kafka-topics.sh` are too poor in terms of accessing only subset of topics. For example, you just cannot delete some topics matching a substring.
+
+Currently, the tool support just a small number of commands:
+
+```
+% ./admin.py --help
+Usage: admin.py [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  -d, --debug            enable debug output
+  -c, --config FILENAME  specify custom path for config file
+  --help                 Show this message and exit.
+
+Commands:
+  alter-topic-config     Alter topic config.
+  delete-topics          Delete all topics starting with prefix.
+  describe-topic         Describe a TOPIC.
+  describe-topic-config  Show topic config.
+  describe-topics        Describe multiple topics using prefix.
+  generate-topics-move   Generates topics-to-move.json file for later use...
+  list-topics            Display topics, all or matched a prefix.
+```
+
+List topics matching a substring:
+```
+% ./admin.py list-topics --prefix foo
+['foo-1',
+ 'foo-2',
+ 'foo-3'
+]
+```
+
+
 Installation via poetry
 -----------------------
 
