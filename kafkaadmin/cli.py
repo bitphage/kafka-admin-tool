@@ -77,6 +77,20 @@ def alter_topic_config(admin, topic, config_var, value):
 
 @main.command()
 @prefix_option
+@click.argument("config_var")
+@click.argument("value")
+@click.pass_obj
+def alter_topics(admin, prefix, config_var, value):
+    """Alter multiple topic configs, selecting topics by prefix."""
+    topics = admin.get_topics_by_prefix(prefix)
+    for topic in topics:
+        resource = ConfigResource(ConfigResourceType.TOPIC, topic, configs={config_var: value})
+        click.echo(f"altering topic config for: {topic}, {config_var}:{value}")
+        admin.admin.alter_configs([resource])
+
+
+@main.command()
+@prefix_option
 @click.pass_obj
 def delete_topics(admin, prefix):
     """Delete all topics matching prefix."""

@@ -28,6 +28,9 @@ Commands:
   list-topics            Display topics, all or matched a prefix.
 ```
 
+Example usages
+--------------
+
 List topics matching a substring:
 ```
 % ./admin.py list-topics --prefix foo
@@ -35,6 +38,12 @@ List topics matching a substring:
  'foo-2',
  'foo-3'
 ]
+```
+
+Alter retention for multiple topics:
+
+```
+./admin.py --config config-amazon3.yml alter-topics --prefix prod-demo retention.ms 86400001
 ```
 
 
